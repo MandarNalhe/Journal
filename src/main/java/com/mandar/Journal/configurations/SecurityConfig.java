@@ -19,8 +19,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+<<<<<<< HEAD
     /*WebSecurityConfigurerAdapter is now depracated, therefore now using SecurityFilterChain
     and AuthenticationProvider*/
+=======
+>>>>>>> origin/main
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
@@ -33,7 +36,11 @@ public class SecurityConfig {
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .rememberMe(Customizer.withDefaults());
+<<<<<<< HEAD
         return http.build();
+=======
+                return http.build();
+>>>>>>> origin/main
     }
 
     @Bean
