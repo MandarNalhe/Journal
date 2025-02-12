@@ -34,11 +34,9 @@ public class SecurityConfig {
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .rememberMe(Customizer.withDefaults());
-<<<<<<< HEAD
+
         return http.build();
-=======
-                return http.build();
->>>>>>> origin/main
+
     }
 
     @Bean
