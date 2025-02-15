@@ -6,8 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-
-
+import java.util.Objects;
 
 
 public class Journal {
@@ -51,6 +50,18 @@ public class Journal {
 
     public LocalDate getDate() {
         return date;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Journal journal = (Journal) o;
+        return Objects.equals(id, journal.id); // Compare by unique identifier
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 

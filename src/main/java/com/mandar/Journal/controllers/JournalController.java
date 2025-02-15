@@ -6,6 +6,8 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,7 +23,9 @@ public class JournalController {
     public ResponseEntity<Boolean> journalEntry(@RequestBody Journal journal){
 
         try{
-            boolean ans = journalService.journalEntry(journal);
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String username = auth.getName();
+            boolean ans = journalService.journalEntry(journal,username);
             if(ans)
                 return new ResponseEntity<>(true, HttpStatus.CREATED);
             else
@@ -34,8 +38,10 @@ public class JournalController {
 
     @GetMapping()
     public  ResponseEntity<List<Journal>> getJournals(){
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String username = auth.getName();
             try{
-                List<Journal> res = journalService.getJournals();
+                List<Journal> res = journalService.getJournals(username);
                 return new ResponseEntity<>(res,HttpStatus.OK);
             }catch (Exception e){
                 System.out.println(e);
@@ -58,8 +64,10 @@ public class JournalController {
 //    }
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteById(@PathVariable ObjectId id){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
         try {
-            boolean ans = journalService.deleteById(id);
+            boolean ans = journalService.deleteById(id,username);
             if(ans)
                 return new ResponseEntity<>(true,HttpStatus.OK);
             return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
@@ -71,12 +79,19 @@ public class JournalController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable ObjectId id, @RequestBody Journal journal){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
         try{
-            journalService.update(id,journal);
+            journalService.update(id, journal, username);
             return new ResponseEntity<>(true,HttpStatus.OK);
         }catch (Exception e){
             System.out.println(e);
             return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllJournals(){
+        return new ResponseEntity<>(journalService.getAllJournals(),HttpStatus.OK);
     }
 }

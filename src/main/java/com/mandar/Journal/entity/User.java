@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -54,6 +55,6 @@ public class User {
         this.journals = journals;
     }
 
-    List<Journal> journals;
+    List<Journal> journals = new ArrayList<>();
 
 }
