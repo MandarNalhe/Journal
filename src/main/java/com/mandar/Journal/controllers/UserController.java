@@ -15,15 +15,10 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
-    @GetMapping
-    public ResponseEntity<?> getAllUsers() {
-        try {
-            List<User> users = userService.getAllUsers();
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        }catch (Exception e){
-            System.out.println(e);
-            return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
-        }
+    @GetMapping("/check-role")
+    public ResponseEntity<?> checkRoles(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return  new ResponseEntity<>(auth.getAuthorities(),HttpStatus.OK);
     }
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user ) {

@@ -1,13 +1,24 @@
 package com.mandar.Journal.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+
+    public User() {
+        password = "";
+        username = "";
+        roles = "";
+    }
+
     public ObjectId getUserId() {
         return userId;
     }
@@ -32,20 +43,23 @@ public class User {
         this.password = password;
     }
 
-    public List<String> getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 
     @Id
     ObjectId userId;
-    @Indexed(name = "username")
+    @Indexed(unique = true)
+    @NonNull
     String username;
+    @NonNull
     String password;
-    List<String> roles;
+    @NonNull
+    String roles;
 
     public List<Journal> getJournals() {
         return journals;
@@ -55,6 +69,7 @@ public class User {
         this.journals = journals;
     }
 
+    @DBRef
     List<Journal> journals = new ArrayList<>();
 
 }
