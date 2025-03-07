@@ -20,7 +20,7 @@ public class MailService {
     JavaMailSender javaMailSender;
     @Autowired
     UserImplRepository userRepo;
-    @Scheduled(cron="0 9 * * SUN")
+    @Scheduled(cron="0 9 * * * 0")
     public void mailSender() {
         List<User> users = userRepo.getUserWithSA();
         for (User user : users) {

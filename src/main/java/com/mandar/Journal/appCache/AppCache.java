@@ -15,7 +15,7 @@ public class AppCache {
     public HashMap<String,String> cache = new HashMap<>();
     @Autowired
     ConfigRepository configRepo;
-    @Scheduled(cron = "10 * * * *")
+    @Scheduled(cron = "10 * * * * *")
     @PostConstruct
     void init(){
         List<Config> all= configRepo.findAll();
