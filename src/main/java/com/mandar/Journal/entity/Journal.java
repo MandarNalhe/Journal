@@ -63,6 +63,13 @@ public class Journal {
     public int hashCode() {
         return Objects.hash(id);
     }
+    private String sentiment;
 
+    public String getSentiment() {
+        return sentiment;
+    }
 
+    public void setSentiment(String sentiment) {
+        this.sentiment = sentiment;
+    }
 }

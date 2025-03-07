@@ -1,22 +1,22 @@
 package com.mandar.Journal.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class User {
 
     public User() {
         password = "";
         username = "";
         roles = "";
+        mail = null;
     }
 
     public ObjectId getUserId() {
@@ -72,4 +72,23 @@ public class User {
     @DBRef
     List<Journal> journals = new ArrayList<>();
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    @NonNull
+    private String mail ;
+
+    public boolean isSentimentAnalysis() {
+        return sentimentAnalysis;
+    }
+
+    public void setSentimentAnalysis(boolean sentimentAnalysis) {
+        this.sentimentAnalysis = sentimentAnalysis;
+    }
+    private boolean sentimentAnalysis;
 }

@@ -18,8 +18,9 @@ public class PublicController {
     @PostMapping("/create-user")
     public ResponseEntity<?> createUser(@RequestBody User user) {
         try {
-            userService.createUser(user);
-            return new ResponseEntity<>(HttpStatus.OK);
+            user.setRoles("USER");
+            String response = userService.createUser(user);
+            return new ResponseEntity<>(response,HttpStatus.OK);
         }catch (Exception e){
             System.out.println(e);
             return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
