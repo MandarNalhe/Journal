@@ -17,6 +17,7 @@ public class User {
         username = "";
         roles = "";
         mail = null;
+
     }
 
     public ObjectId getUserId() {

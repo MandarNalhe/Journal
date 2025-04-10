@@ -44,7 +44,7 @@ public class UserService {
         HttpHeaders headers = new HttpHeaders();
         headers.set(apiKey,apiKeyValue);
         HttpEntity<String> entity = new HttpEntity<String>("",headers);
-        ResponseEntity<Response[]> res = restTemplate.exchange(appCache.cache.get("api"), HttpMethod.GET,entity,Response[].class);
+        ResponseEntity<Response[]> res = restTemplate.exchange(appCache.getData("api"), HttpMethod.GET,entity,Response[].class);
         List<Response> responses = Arrays.asList(Objects.requireNonNull(res.getBody()));
         return "Hi "+user.getUsername()+"\n Here's a Quote for you: "+responses.get(0).getQuote()+"\n By : "+responses.get(0).getAuthor();
     }
