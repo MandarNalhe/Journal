@@ -1,6 +1,6 @@
 package com.mandar.Journal.entity;
 
-import lombok.NonNull;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -55,11 +55,11 @@ public class User {
     @Id
     ObjectId userId;
     @Indexed(unique = true)
-    @NonNull
+
     String username;
-    @NonNull
+
     String password;
-    @NonNull
+
     String roles;
 
     public List<Journal> getJournals() {
@@ -81,7 +81,7 @@ public class User {
         this.mail = mail;
     }
 
-    @NonNull
+
     private String mail ;
 
     public boolean isSentimentAnalysis() {

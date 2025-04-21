@@ -46,7 +46,7 @@ public class UserService {
         HttpEntity<String> entity = new HttpEntity<String>("",headers);
         ResponseEntity<Response[]> res = restTemplate.exchange(appCache.getData("api"), HttpMethod.GET,entity,Response[].class);
         List<Response> responses = Arrays.asList(Objects.requireNonNull(res.getBody()));
-        return "Hi "+user.getUsername()+"\n Here's a Quote for you: "+responses.get(0).getQuote()+"\n By : "+responses.get(0).getAuthor();
+        return "Hi "+user.getUsername()+"\n Here's a Quote for you: "+responses.get(0).getQuote()+"\n By : "+responses.get(0).getAuthor()+"\n Today is Monday";
     }
 
     public boolean updateUser(User user, String username) {
