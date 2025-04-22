@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: journal-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: journal
+  template:
+    metadata:
+      labels:
+        app: journal
+    spec:
+      containers:
+        - name: journal
+          image: journal-app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
