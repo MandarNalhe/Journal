@@ -30,6 +30,17 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
+      - name: Set up environment variables
+        run: |
+            echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+            echo "API_VALUE=${{ secrets.API_VALUE }}" >> $GITHUB_ENV
+            echo "MAIL=${{ secrets.MAIL }}" >> $GITHUB_ENV
+          echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> $GITHUB_ENV
+          echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> $GITHUB_ENV
+          echo "REDIS_HOST=${{ secrets.REDIS_HOST }}" >> $GITHUB_ENV
+          echo "REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}" >> $GITHUB_ENV
+          echo "REDIS_PORT=${{ secrets.REDIS_PORT }}" >> $GITHUB_ENV
+
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/journal-backend .
 
